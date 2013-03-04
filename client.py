@@ -28,20 +28,26 @@ def receiver(sock, agent):
 
 
 class Agent:
+    is_running = False
     state = None
 
+    def control(s, msg):
+        if msg == ' run':
+            print 'Running agent'
+            s.is_running = True
+        if msg == ' stop':
+            print 'Stopping agent'
+            s.is_running = False
+
     def act(s, msg):
-        if 'agent' in msg:
-            pass
-        else:
-            pass
+        pass
 
 
 class UserPrompt(cmd.Cmd):
     prompt = ''
 
     def do_agent(s, line):
-        agent.act('agent ' + line)
+        agent.control(line)
 
     def do_help(s, line):
         s.default('help ' + line)
